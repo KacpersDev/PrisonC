@@ -1,0 +1,8 @@
+name: Prison
+version: '${project.version}'
+main: com.goosemc.Prison
+api-version: 1.19
+commands:
+  setspawn:
+  spawn:
+  gang:

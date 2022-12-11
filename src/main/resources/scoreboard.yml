@@ -1,0 +1,14 @@
+scoreboard-title: '     &3&lGOOSE&b&lMC &7| &fPRISON     '
+
+scoreboard-normal:
+  - " "
+  - "&3&l%player%"
+  - " &fRank: &a0"
+  - " &fPrestige: &a0"
+  - " &fBlocks Mined: &a0"
+  - " "
+  - "&3&lBALANCE"
+  - " &fMoney: &a0"
+  - " &fTokens: &e0"
+  - " &fCrystals: &a0"
+  - " &fGems: &a0"
