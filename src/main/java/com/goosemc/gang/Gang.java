@@ -43,6 +43,11 @@ public class Gang {
             return;
         }
 
+        if (gangName.length() > 16) {
+            Objects.requireNonNull(Bukkit.getPlayer(leaderUUID)).sendMessage(Color.translate("&cGang name cannot be longer then 16 characters."));
+            return;
+        }
+
         this.prison.getGangConfiguration().set("Gang." + this.gangName, "");
         this.prison.getGangConfiguration().set("Gang." + this.gangName + ".leader", leaderUUID.toString());
         this.prison.getGangConfiguration().set("Gang." + this.gangName + ".money", money);
@@ -109,7 +114,6 @@ public class Gang {
     }
 
     public void invite(UUID invited){
-
 
     }
 
