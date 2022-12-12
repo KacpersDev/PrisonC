@@ -6,3 +6,5 @@ commands:
   setspawn:
   spawn:
   gang:
+  token:
+  money:

@@ -5,6 +5,7 @@ import com.goosemc.utils.Color;
 import com.goosemc.utils.Config;
 import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,7 @@ public class Gang {
     private UUID leaderUUID;
     private List<UUID> members;
     private List<UUID> captains;
+    public HashMap<UUID, String> invitation = new HashMap<>();
     private double money;
     public Gang(Prison prison, String gangName, UUID leaderUUID, double money, List<UUID> members, List<UUID> captains) {
         this.prison = prison;
@@ -28,9 +30,7 @@ public class Gang {
         this.members = members;
         this.captains = captains;
     }
-
     public Gang(Prison prison) { this.prison = prison; }
-
     @Deprecated
     public void create(){
         if (getGangByPlayer(leaderUUID) != null) {
@@ -104,20 +104,24 @@ public class Gang {
         return this.prison.getGangConfiguration().getString("Gang." + gang + ".leader");
     }
 
+    public @NotNull List<String> getGangCaptains(String gang){
+        return this.prison.getGangConfiguration().getStringList("Gang." + gang + ".captains");
+    }
+
     public boolean isGang(){
         return this.prison.getGangConfiguration().getBoolean("Gang." + gangName);
     }
 
-    public List<HashMap<String, String>> getGangMoney(){
+    public List<HashMap<String, String>> getGangMoney(){ //leaderboards
 
         return null;
     }
 
-    public void invite(UUID invited){
-
+    public void invite(UUID invited, String gang){
+        invitation.put(invited, gang);
     }
 
-    public List<HashMap<String, String>> info(){
+    public List<HashMap<String, String>> info(){ // gang info
         return null;
     }
 }
