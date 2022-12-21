@@ -20,7 +20,7 @@ public class Gang {
     private UUID leaderUUID;
     private List<UUID> members;
     private List<UUID> captains;
-    public HashMap<UUID, String> invitation = new HashMap<>();
+    public static HashMap<UUID, List<String>> invitation = new HashMap<>();
     private double money;
     public Gang(Prison prison, String gangName, UUID leaderUUID, double money, List<UUID> members, List<UUID> captains) {
         this.prison = prison;
@@ -100,6 +100,18 @@ public class Gang {
         return null;
     }
 
+    public void join(String gang, UUID player){
+        List<String> members = this.prison.getGangConfiguration().getStringList("Gang." + gang + ".members");
+        members.add(player.toString());
+        this.prison.getGangConfiguration().set("Gang." + gang + ".members", members);
+    }
+
+    public void kick(String gang, UUID player){
+        List<String> members = this.prison.getGangConfiguration().getStringList("Gang." + gang + ".members");
+        members.remove(player.toString());
+        this.prison.getGangConfiguration().set("Gang." + gang + ".members", members);
+    }
+
     public String getGangLeader(String gang) {
         return this.prison.getGangConfiguration().getString("Gang." + gang + ".leader");
     }
@@ -117,8 +129,10 @@ public class Gang {
         return null;
     }
 
-    public void invite(UUID invited, String gang){
-        invitation.put(invited, gang);
+    public void invite(UUID invited, String gang) {
+        List<String> inv = invitation.get(invited);
+        inv.add(gang);
+        invitation.put(invited, inv);
     }
 
     public List<HashMap<String, String>> info(){ // gang info

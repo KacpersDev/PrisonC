@@ -1,1 +1,56 @@
 pickaxe-name: '&a%player% pickaxe'
+
+spawn:
+  x: 0
+  y: 100
+  z: 0
+
+token:
+  usage:
+    - "&f&m-----------------------------------"
+    - "&c/token set <player> <amount>"
+    - "&c/token add <player> <amount>"
+    - "&c/token remove <player> <amount>"
+    - "&c/token check <player> <amount>"
+    - "&f&m-----------------------------------"
+money:
+  usage:
+    - "&f&m-----------------------------------"
+    - "&c/money set <player> <amount>"
+    - "&c/money add <player> <amount>"
+    - "&c/money remove <player> <amount>"
+    - "&c/money check <player> <amount>"
+    - "&f&m-----------------------------------"
+
+pickaxe-items:
+  1:
+    item: "SUGAR"
+    name: "&f&lSpeed"
+    lore:
+      - ""
+      - "&fAllows you to walk faster"
+      - "&fwhile holding your pickaxe."
+      - ""
+      - "&9&l| &fCurrent Level: &9%SPEED_LEVEL% / 3"
+      - ""
+      - "&9&l| &fUpgrade: &9%SPEED_PRICE% Tokens"
+    slot: 12
+    level: 1000
+    each: 2
+    max: 3
+    enchant: "speed"
+  2:
+    item: "FEATHER"
+    name: "&7&lJumpBoost"
+    lore:
+      - ""
+      - "&fAllows you to jump further "
+      - "&fwhile holding your pickaxe."
+      - ""
+      - "&9&l| &fCurrent Level: &9%JUMP_LEVEL% / 3"
+      - ""
+      - "&9&l| &fUpgrade: &9%JUMP_PRICE% Tokens"
+    slot: 14
+    level: 1000
+    each: 2
+    max: 3

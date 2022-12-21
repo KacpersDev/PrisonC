@@ -15,9 +15,8 @@ public class EconomyManager {
 
     private final Prison prison;
     private UUID uuid;
-
-    public static HashMap<UUID, Double> money = new HashMap<>();
-    public static HashMap<UUID, Double> token = new HashMap<>();
+    public static HashMap<UUID, Long> money = new HashMap<>();
+    public static HashMap<UUID, Long> token = new HashMap<>();
 
     public EconomyManager(Prison prison, UUID uuid) {
         this.prison = prison;
@@ -37,8 +36,8 @@ public class EconomyManager {
     }
 
     public void loadEconomy(){
-        money.put(uuid, this.prison.getEconomyConfiguration().getDouble("Player." + uuid.toString() + ".money"));
-        token.put(uuid, this.prison.getEconomyConfiguration().getDouble("Player." + uuid.toString() + ".token"));
+        money.put(uuid, this.prison.getEconomyConfiguration().getLong("Player." + uuid.toString() + ".money"));
+        token.put(uuid, this.prison.getEconomyConfiguration().getLong("Player." + uuid.toString() + ".token"));
     }
 
     public void saveEconomy(){
@@ -69,21 +68,38 @@ public class EconomyManager {
         new Config(this.prison.getEconomy(), this.prison.getEconomyConfiguration());
     }
 
-    public double getMoney(UUID uuid){
+    public Long getMoney(UUID uuid){
         return money.get(uuid);
     }
 
-    public double getToken(UUID uuid) {
+    public Long getToken(UUID uuid) {
         return token.get(uuid);
     }
 
-    public void putMoney(UUID uuid, double amount) {
-        double current = getMoney(uuid);
-        money.replace(uuid, current, (current + amount));
+    public void setMoney(UUID uuid, long amount) {
+        money.replace(uuid, money.get(uuid), amount);
+    }
+    public void setToken(UUID uuid, long amount) {
+        token.replace(uuid, token.get(uuid), amount);
     }
 
-    public void putToken(UUID uuid, double amount) {
-        double current = getToken(uuid);
-        token.replace(uuid, current, (current + amount));
+    public void addMoney(UUID uuid, long amount) {
+        money.replace(uuid, money.get(uuid), (money.get(uuid) + amount));
+    }
+
+    public void addToken(UUID uuid, long amount) {
+        token.replace(uuid, token.get(uuid), (token.get(uuid) + amount));
+    }
+
+    public void removeToken(UUID uuid, String amount) {
+        long tokens = token.get(uuid);
+        long newAmount = (tokens - Integer.parseInt(amount));
+        token.replace(uuid, token.get(uuid), (newAmount));
+    }
+
+    public void removeMoney(UUID uuid, String amount) {
+        long m = money.get(uuid);
+        long newAmount = (m - Integer.parseInt(amount));
+        money.replace(uuid, money.get(uuid), (newAmount));
     }
 }

@@ -9,6 +9,7 @@ import java.io.IOException;
 
 public class Config {
 
+    @SuppressWarnings("ALL")
     public Config(File file, FileConfiguration configuration, String dir) {
         if (!file.exists()) {
             file.getParentFile().mkdir();

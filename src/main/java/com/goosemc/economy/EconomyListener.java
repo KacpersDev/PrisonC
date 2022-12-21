@@ -28,7 +28,9 @@ public class EconomyListener implements Listener {
     }
 
     @EventHandler
+    @Deprecated
     public void onQuit(PlayerQuitEvent event) {
+        event.setQuitMessage(null);
         this.manager = new EconomyManager(this.prison, event.getPlayer().getUniqueId());
         this.manager.saveEconomy();
     }
